@@ -1,0 +1,160 @@
+CREATE DATABASE SCNF;
+
+CREATE TABLE INFO
+(
+	ID_INFO INT IDENTITY PRIMARY KEY,
+	NOME VARCHAR(100) NOT NULL,
+	CPF VARCHAR(15) UNIQUE NOT NULL,
+	RG VARCHAR(13) UNIQUE NOT NULL,
+	ENDERECO VARCHAR(255) NOT NULL,
+	CEP VARCHAR(11) NOT NULL,
+	SEXO VARCHAR(20),
+	EMAIL VARCHAR(150) UNIQUE NOT NULL,
+	EMAILINST VARCHAR(150) UNIQUE,
+	TELEFONE SMALLINT NOT NULL,
+	DATA_NASCIMENTO DATE NOT NULL,
+	TITULO_ELEITOR VARCHAR(15) UNIQUE NOT NULL,
+	RESERVISTA BIT UNIQUE
+);
+
+npx sequelize-cli model:create --name Infos --attributes nome:string,cpf:string,rg:string,endereco:string,cep:string,sexo:string,email:string,emailInst:string,status:string,telefone:string,dataNascimento:dateonly,tituloEleitor:string,reservista:string,deletedAt:date
+
+CREATE TABLE TRANSFERENCIA(
+	ID_TRANSFERENCIA INT IDENTITY PRIMARY KEY,
+	DATA_TRANSFERENCIA DATE,
+	INSTUICAO_ORIGEM VARCHAR(255),
+	REAPROVEITAMENTO VARCHAR(255),
+	OBSERVACOES VARCHAR(255)
+);
+
+npx sequelize-cli model:create --name Transferencias --attributes dataTransferencia:dateonly,instituicaoOrigem:string,reaproveitamento:string,observacoes:string,deletedAt:date
+
+CREATE TABLE NOTAS(
+	ID_NOTAS INT IDENTITY PRIMARY KEY,
+	NP1 FLOAT,
+	NP2 FLOAT,
+	TRABALHOS FLOAT,
+	EXAME FLOAT,
+	SUB FLOAT,
+	PROJ_INTE FLOAT,
+	MEDIA FLOAT
+);
+
+npx sequelize-cli model:create --name Notas --attributes np1:float,np2:float,trabalhos:float,exame:float,sub:float,projInter:float,media:float
+
+CREATE TABLE CALENDARIO
+(
+	ID_CALENDARIO INT IDENTITY PRIMARY KEY,
+	DATA_PERIODO_ESCOLAR VARCHAR(255),
+	DATA_AVALIACOES VARCHAR(255),
+	DATA_NOTAS_PROFESSORES VARCHAR(255),
+	DATAS VARCHAR(255)
+);
+
+npx sequelize-cli model:create --name Calendario --attributes dataPeriodoEscolar:string,dataAvaliacoes:string,dataNotasProfessores:string,datas:string
+
+CREATE TABLE MATRICULA(
+	ID_MATRICULA INT IDENTITY PRIMARY KEY,
+	ID_TRANSFERENCIA INT FOREIGN KEY REFERENCES TRANSFERENCIA (ID_TRANSFERENCIA),
+	STATUS_MATRICULA BIT,
+	DATA_INICIO_CURSO DATE NOT NULL,
+	DATA_TERMINO_CURSO DATE,
+	DATA_TRANCAMENTO DATE,
+	OBSERVACOES VARCHAR(255)
+);
+
+npx sequelize-cli model:create --name Matriculas --attributes statusMatricula:boolean,dataInicioCurso:dateonly,dataTerminoCurso:dateonly,dataTrancamento:dateonly,observacoes:string
+
+
+CREATE TABLE MATERIA(
+	ID_MATERIA INT IDENTITY PRIMARY KEY,
+	ID_NOTAS INT FOREIGN KEY REFERENCES NOTAS (ID_NOTAS),
+	NOME VARCHAR(150) NOT NULL,
+	CARGA_HORARIA VARCHAR(10),
+	FREQUENCIA INT,
+	NUMERO_AULAS INT,
+	DATA_MATERIA DATE,
+	STATUS_MATERIA BIT,
+	OBSERVACOES VARCHAR(255),
+	
+);
+
+npx sequelize-cli model:create --name Materias --attributes nome:string,cargaHoraria:string,frequencia:float,numerosAulas:int,dataMateria:dateonly,statusMateria:boolean,observacoes:string
+
+
+CREATE TABLE CAMPUS(
+	ID_CAMPUS INT IDENTITY PRIMARY KEY,
+	ID_CURSOS INT FOREIGN KEY REFERENCES CAMPUS_CURSOS (ID_CAMPUS_CURSOS),
+	NOME_CAMPUS VARCHAR(255) NOT NULL,
+	ENDERECO_CAMPUS VARCHAR(255) NOT NULL,
+	CEP_CAMPUS VARCHAR(11) NOT NULL,
+	TELEFONE_CAMPUS VARCHAR(17) NOT NULL,
+	QUANT_ALUNOS INT
+);
+
+npx sequelize-cli model:create --name Campus --attributes nome:string,endereco:string,cep:string,telefone:string,quantAlunos:int
+
+CREATE TABLE CURSOS(
+	ID_CURSO INT IDENTITY PRIMARY KEY,
+	ID_MATERIA_CURSO INT FOREIGN KEY REFERENCES MATERIA (ID_MATERIA),
+	ID_CAMPUS INT FOREIGN KEY REFERENCES CAMPUS_CURSOS (ID_CAMPUS_CURSOS),
+	NOME VARCHAR(150) NOT NULL,
+	DURACAO INT,
+	OBSERVACOES VARCHAR(255)
+);
+
+npx sequelize-cli model:create --name Cursos --attributes nome:string,duracao:string,observacoes:string
+
+CREATE TABLE CAMPUS_CURSOS(
+	ID_CAMPUS_CURSOS INT IDENTITY PRIMARY KEY,
+	ID_CAMPUS INT FOREIGN KEY REFERENCES CAMPUS (ID_CAMPUS),
+	ID_CURSOS INT FOREIGN KEY REFERENCES CURSOS (ID_CURSO),
+	STATUS BIT
+);
+
+npx sequelize-cli model:create --name Campus_Cursos --attributes status:boolean
+
+CREATE TABLE PROFESSOR
+(
+	ID_PROFESSOR INT IDENTITY PRIMARY KEY,
+	ID_INFO_PROFESSOR INT FOREIGN KEY REFERENCES INFO (ID_INFO),
+	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIA (ID_MATERIA),
+	SENHA VARCHAR(255) NOT NULL,
+	STATUS BIT
+
+);
+
+npx sequelize-cli model:create --name Professores --attributes senha:string,status:boolean
+
+CREATE TABLE ALUNO
+(
+	ID_ALUNO INT IDENTITY PRIMARY KEY,
+	ID_INFO_ALUNO INT FOREIGN KEY REFERENCES INFO (ID_INFO),
+	ID_MATRICULA INT FOREIGN KEY REFERENCES MATRICULA (ID_MATRICULA),
+	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIA (ID_MATERIA),
+	TIPO_INGRESSO VARCHAR(255),
+	SENHA VARCHAR(255) NOT NULL,
+	
+);
+
+npx sequeliza-cli model:create --name Alunos --attributes tipoIngresso:string,senha:string
+
+CREATE TABLE ADM
+(
+	ID_ADM INT IDENTITY PRIMARY KEY,
+	ID_INFO_ADM INT FOREIGN KEY REFERENCES INFO (ID_INFO),
+	ID_PROFESSOR_ADM INT FOREIGN KEY REFERENCES PROFESSOR (ID_PROFESSOR),
+	ID_ALUNO_ADM INT FOREIGN KEY REFERENCES ALUNO (ID_ALUNO),
+	ID_MATRICULA_ADM INT FOREIGN KEY REFERENCES MATRICULA (ID_MATRICULA),
+	ID_CAMPUS_ADM INT FOREIGN KEY REFERENCES CAMPUS (ID_CAMPUS),
+	CARGO VARCHAR(255) NOT NULL,
+	SENHA VARCHAR(255) NOT NULL
+
+);
+
+npx sequelize-cli model:create --name ADMs --attributes cargo:string,senha:string
+
+
+
+
+
