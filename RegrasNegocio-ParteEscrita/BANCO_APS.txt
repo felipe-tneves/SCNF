@@ -79,7 +79,7 @@ CREATE TABLE MATERIA(
 	
 );
 
-npx sequelize-cli model:create --name Materias --attributes nome:string,cargaHoraria:string,frequencia:float,numerosAulas:int,dataMateria:dateonly,statusMateria:boolean,observacoes:string
+npx sequelize-cli model:create --name Materias --attributes nome:string,cargaHoraria:string,frequencia:float,numerosAulas:integer,dataMateria:dateonly,statusMateria:boolean,observacoes:string
 
 
 CREATE TABLE CAMPUS(
@@ -92,7 +92,7 @@ CREATE TABLE CAMPUS(
 	QUANT_ALUNOS INT
 );
 
-npx sequelize-cli model:create --name Campus --attributes nome:string,endereco:string,cep:string,telefone:string,quantAlunos:int
+npx sequelize-cli model:create --name Campus --attributes nome:string,endereco:string,cep:string,telefone:string,quantAlunos:integer
 
 CREATE TABLE CURSOS(
 	ID_CURSO INT IDENTITY PRIMARY KEY,
@@ -114,45 +114,62 @@ CREATE TABLE CAMPUS_CURSOS(
 
 npx sequelize-cli model:create --name Campus_Cursos --attributes status:boolean
 
-CREATE TABLE PROFESSOR
+CREATE TABLE PROFESSORES
 (
 	ID_PROFESSOR INT IDENTITY PRIMARY KEY,
-	ID_INFO_PROFESSOR INT FOREIGN KEY REFERENCES INFO (ID_INFO),
-	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIA (ID_MATERIA),
+	ID_INFO_PROFESSOR INT FOREIGN KEY REFERENCES INFOS (ID_INFO),
+	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIAS (ID_MATERIA),
+	ID_CALENDARIO INT FOREIGN KEY REFERENCES CALENDARIO (ID_CALENDARIO),
 	SENHA VARCHAR(255) NOT NULL,
-	STATUS BIT
+	STATUS_PROFESSOR BIT
 
 );
 
 npx sequelize-cli model:create --name Professores --attributes senha:string,status:boolean
 
-CREATE TABLE ALUNO
+CREATE TABLE ALUNOS
 (
 	ID_ALUNO INT IDENTITY PRIMARY KEY,
-	ID_INFO_ALUNO INT FOREIGN KEY REFERENCES INFO (ID_INFO),
-	ID_MATRICULA INT FOREIGN KEY REFERENCES MATRICULA (ID_MATRICULA),
-	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIA (ID_MATERIA),
+	ID_INFO_ALUNO INT FOREIGN KEY REFERENCES INFOS (ID_INFO),
+	ID_MATRICULA INT FOREIGN KEY REFERENCES MATRICULAS (ID_MATRICULA),
+	ID_MATERIA INT FOREIGN KEY REFERENCES MATERIAS (ID_MATERIA),
+	ID_CALENDARIO INT FOREIGN KEY REFERENCES CALENDARIO (ID_CALENDARIO),
 	TIPO_INGRESSO VARCHAR(255),
 	SENHA VARCHAR(255) NOT NULL,
-	
+	STATUS_ALUNO BIT
 );
 
-npx sequeliza-cli model:create --name Alunos --attributes tipoIngresso:string,senha:string
+npx sequelize-cli model:create --name Alunos --attributes tipoIngresso:string,senha:string,status:boolean
+
+CREATE TABLE TURMAS
+(
+	ID_TURMAS INT IDENTITY PRIMARY KEY,
+	ID_ALUNO INT FOREIGN KEY REFERENCES ALUNOS (ID_ALUNO),
+	ID_PROFESSOR INT FOREIGN KEY REFERENCES PROFESSORES (ID_PROFESSOR),
+	CODIGO VARCHAR(255),
+	STATUS_TURMA BIT,
+	PERIODO VARCHAR(255)
+);
+
+npx sequelize-cli model:create --name Turmas --attributes codigo:string,status:boolean,periodo:string
 
 CREATE TABLE ADM
 (
 	ID_ADM INT IDENTITY PRIMARY KEY,
-	ID_INFO_ADM INT FOREIGN KEY REFERENCES INFO (ID_INFO),
-	ID_PROFESSOR_ADM INT FOREIGN KEY REFERENCES PROFESSOR (ID_PROFESSOR),
-	ID_ALUNO_ADM INT FOREIGN KEY REFERENCES ALUNO (ID_ALUNO),
-	ID_MATRICULA_ADM INT FOREIGN KEY REFERENCES MATRICULA (ID_MATRICULA),
+	ID_INFO_ADM INT FOREIGN KEY REFERENCES INFOS (ID_INFO),
+	ID_PROFESSOR_ADM INT FOREIGN KEY REFERENCES PROFESSORES (ID_PROFESSOR),
+	ID_ALUNO_ADM INT FOREIGN KEY REFERENCES ALUNOS (ID_ALUNO),
+	ID_MATRICULA_ADM INT FOREIGN KEY REFERENCES MATRICULAS (ID_MATRICULA),
 	ID_CAMPUS_ADM INT FOREIGN KEY REFERENCES CAMPUS (ID_CAMPUS),
+	ID_CALENDARIO INT FOREIGN KEY REFERENCES CALENDARIO (ID_CALENDARIO),
+	ID_TURMAS INT FOREIGN KEY REFERENCES TURMAS (ID_TURMAS),
 	CARGO VARCHAR(255) NOT NULL,
-	SENHA VARCHAR(255) NOT NULL
+	SENHA VARCHAR(255) NOT NULL,
+	STATUS BIT
 
 );
 
-npx sequelize-cli model:create --name ADMs --attributes cargo:string,senha:string
+npx sequelize-cli model:create --name ADMs --attributes cargo:string,senha:string,status:boolean
 
 
 
