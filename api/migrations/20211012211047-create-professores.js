@@ -14,6 +14,21 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN
       },
+      id_infos: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Infos', key: 'id'}
+      },
+      id_materia: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Materias', key: 'id'}
+      },
+      id_calendario: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Calendario', key: 'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

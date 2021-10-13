@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Calendario.belongsTo(models.ADMs, {
+        foreignKey: 'id_calendario'
+      })
+      Calendario.belongsTo(models.Professores, {
+        foreignKey: 'id_calendario'
+      })
+      Calendario.belongsTo(models.Alunos, {
+        foreignKey: 'id_calendario'
+      })
     }
   };
   Calendario.init({

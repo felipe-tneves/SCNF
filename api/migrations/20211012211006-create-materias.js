@@ -29,6 +29,11 @@ module.exports = {
       observacoes: {
         type: Sequelize.STRING
       },
+      id_nota: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Notas', key: 'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

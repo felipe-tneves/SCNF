@@ -23,6 +23,11 @@ module.exports = {
       observacoes: {
         type: Sequelize.STRING
       },
+      id_transferencia: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Transferencias', key: 'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

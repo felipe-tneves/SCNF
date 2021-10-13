@@ -17,6 +17,16 @@ module.exports = {
       periodo: {
         type: Sequelize.STRING
       },
+      id_aluno: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Alunos', key: 'id'}
+      },
+      id_professor: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Professores', key: 'id'}
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
