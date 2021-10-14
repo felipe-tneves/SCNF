@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
      ADMs.belongsTo(models.Infos, {
-       foreignKey: 'id_infos'
+       foreignKey: 'id_adms'
      })
      ADMs.belongsTo(models.Calendario,{
        foreignKey: 'id_calendario'
