@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Professores.hasMany(models.ADMs, {
         foreignKey: 'id_professor'
       })
-      Professores.belongsTo(models.Calendario, {
+      Professores.belongsTo(models.Calendarios, {
         foreignKey: 'id_calendario'
       })
       Professores.belongsTo(models.Infos, {

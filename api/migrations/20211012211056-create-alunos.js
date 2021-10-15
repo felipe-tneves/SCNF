@@ -35,7 +35,7 @@ module.exports = {
       id_calendario: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Calendario', key: 'id'}
+        references: { model: 'Calendarios', key: 'id'}
       },
       createdAt: {
         allowNull: false,
