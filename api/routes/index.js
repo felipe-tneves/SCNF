@@ -4,6 +4,7 @@ const infos = require('./infosRoute')
 const transferencias = require('./transferenciasRoute')
 const calendarios = require('./calendariosRoute')
 const matriculas = require('./matriculasRoute')
+const materias = require('./materiasRouter')
 
 module.exports = app => {
     app.use(
@@ -12,6 +13,7 @@ module.exports = app => {
         infos,
         transferencias,
         calendarios,
-        matriculas
+        matriculas,
+        materias
     )
 }

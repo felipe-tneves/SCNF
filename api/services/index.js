@@ -3,11 +3,13 @@ const InfosServices = require('./InfosServices')
 const TransferenciasServices = require('./TransferenciasServices')
 const CalendariosServices = require('./CalendariosServices')
 const MatriculasServices = require('./MatriculasServirces')
+const MateriasServices = require('./MateriasServices')
 
 module.exports = {
     NotasServices: NotasServices,
     InfosServices: InfosServices,
     TransferenciasServices: TransferenciasServices,
     CalendariosServices: CalendariosServices,
-    MatriculasServices: MatriculasServices
+    MatriculasServices: MatriculasServices,
+    MateriasServices: MateriasServices
 }

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_aluno'
       })
       Materias.belongsTo(models.Notas, {
-        foreignKey: 'id_nota'
+        foreignKey: 'id_notas'
       })
     }
   };
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     cargaHoraria: DataTypes.STRING,
     frequencia: DataTypes.FLOAT,
     numerosAulas: DataTypes.INTEGER,
-    dataMateria: DataTypes.DATEONLY,
+    dataMateria: DataTypes.STRING,
     statusMateria: DataTypes.BOOLEAN,
     observacoes: DataTypes.STRING
   }, {

@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       dataMateria: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
       },
       statusMateria: {
         type: Sequelize.BOOLEAN
@@ -29,7 +29,7 @@ module.exports = {
       observacoes: {
         type: Sequelize.STRING
       },
-      id_nota: {
+      id_notas: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Notas', key: 'id'}
