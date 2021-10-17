@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const materias = require('./materias');
 module.exports = (sequelize, DataTypes) => {
   class Matriculas extends Model {
     /**
@@ -11,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Matriculas.hasMany(models.ADMs, {
-        foreignKey: 'id_matricula'
+      Matriculas.belongsTo(models.Campus, {
+        foreignKey: 'id_campus'
       })
-      Matriculas.belongsTo(models.Transferencias, {
-        foreignKey: 'id_transferencia'
+      Matriculas.belongsTo(models.Cursos, {
+        foreignKey: 'id_cursos'
+      })
+      Matriculas.hasOne(models.Alunos, {
+        foreignKey: 'id_matriculas'
       })
     }
   };
@@ -23,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     statusMatricula: DataTypes.BOOLEAN,
     dataInicioCurso: DataTypes.DATEONLY,
     dataTerminoCurso: DataTypes.DATEONLY,
-    dataTrancamento: DataTypes.DATEONLY,
-    observacoes: DataTypes.STRING
+    observacoes: DataTypes.STRING,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Matriculas',

@@ -10,27 +10,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Alunos.hasMany(models.ADMs, {
-        foreignKey: 'id_aluno'
-      })
-      Alunos.hasMany(models.Turmas, {
-        foreignKey: 'id_turma'
+      Alunos.belongsTo(models.Campus, {
+        foreignKey: 'id_campus'
       })
       Alunos.belongsTo(models.Matriculas, {
-        foreignKey: 'id_matricula'
+        foreignKey: 'id_matriculas'
       })
-      Alunos.belongsTo(models.Calendarios, {
-        foreignKey: 'id_calendario'
+      Alunos.belongsTo(models.Cursos, {
+        foreignKey: 'id_cursos'
+      })
+      Alunos.belongsTo(models.Materias, {
+        foreignKey: 'id_materias'
       })
       Alunos.belongsTo(models.Infos, {
         foreignKey: 'id_infos'
       })
+      Alunos.hasMany(models.Notas, {
+        foreignKey: 'id_alunos'
+      })
+      Alunos.belongsTo(models.Calendarios, {
+        foreignKey: 'id_calendarios'
+      })
     }
   };
   Alunos.init({
-    tipoIngresso: DataTypes.STRING,
     senha: DataTypes.STRING,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.BOOLEAN,
+    tipoIngresso: DataTypes.STRING,
+    instituicaoOrigem: DataTypes.STRING,
+    rendaFamiliar: DataTypes.DECIMAL,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Alunos',

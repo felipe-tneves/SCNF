@@ -17,16 +17,27 @@ module.exports = {
       dataTerminoCurso: {
         type: Sequelize.DATEONLY
       },
-      dataTrancamento: {
-        type: Sequelize.DATEONLY
-      },
       observacoes: {
         type: Sequelize.STRING
       },
-      id_transferencia: {
+      id_campus: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Transferencias', key: 'id'}
+        references: {
+          model: 'Campuses',
+          key: 'id'
+        }
+      },
+      id_cursos: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cursos',
+          key: 'id'
+        }
+      },
+      deletedAt: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

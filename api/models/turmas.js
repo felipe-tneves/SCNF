@@ -10,21 +10,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Turmas.hasMany(models.ADMs, {
-        foreignKey: 'id_turma'
+      Turmas.belongsTo(models.Cursos, {
+        foreignKey: 'id_cursos'
       })
-      Turmas.belongsTo(models.Professores, {
-        foreignKey: 'id_professor'
-      })
-      Turmas.belongsTo(models.Alunos, {
-        foreignKey: 'id_aluno'
+      Turmas.hasMany(models.Materias, {
+        foreignKey: 'id_turmas'
       })
     }
   };
   Turmas.init({
     codigo: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
-    periodo: DataTypes.STRING
+    periodo: DataTypes.STRING,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Turmas',

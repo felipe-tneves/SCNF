@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ADMs', {
+    await queryInterface.createTable('Adms', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,37 +20,29 @@ module.exports = {
       id_infos: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Infos', key: 'id'}
+        references: {
+          model: 'Infos',
+          key: 'id'
+        }
       },
-      id_professor: {
+      id_calendarios: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Professores', key: 'id'}
-      },
-      id_aluno: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Alunos', key: 'id'}
-      },
-      id_matricula: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Matriculas', key: 'id'}
+        references: {
+          model: 'Calendarios',
+          key: 'id'
+        }
       },
       id_campus: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Campus', key: 'id'}
+        references: {
+          model: 'Campuses',
+          key: 'id'
+        }
       },
-      id_calendario: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Calendarios', key: 'id'}
-      },
-      id_turma: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Turmas', key: 'id'}
+      deletedAt: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -63,6 +55,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ADMs');
+    await queryInterface.dropTable('Adms');
   }
 };

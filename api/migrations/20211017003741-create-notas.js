@@ -23,11 +23,41 @@ module.exports = {
       sub: {
         type: Sequelize.FLOAT
       },
-      projInter: {
+      projIntegrador: {
         type: Sequelize.FLOAT
       },
       media: {
         type: Sequelize.FLOAT
+      },
+      observacoes: {
+        type: Sequelize.STRING
+      },
+      id_alunos: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Alunos',
+          key: 'id'
+        }
+      },
+      id_materias: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Materias',
+          key: 'id'
+        }
+      },
+      id_professores: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Professores',
+          key: 'id'
+        }
+      },
+      deletedAt: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

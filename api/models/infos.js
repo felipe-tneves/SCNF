@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Infos.hasOne(models.ADMs, {
-        foreignKey: 'id_adms'
-      })
       Infos.hasOne(models.Professores, {
-        foreignKey: 'id_professor'
+        foreignKey: 'id_infos'
       })
       Infos.hasOne(models.Alunos, {
-        foreignKey: 'id_aluno'
+        foreignKey: 'id_infos'
+      })
+      Infos.hasOne(models.Adms, {
+        foreignKey: 'id_infos'
       })
     }
   };
@@ -30,11 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     sexo: DataTypes.STRING,
     email: DataTypes.STRING,
     emailInst: DataTypes.STRING,
-    status: DataTypes.STRING,
+    status: DataTypes.BOOLEAN,
     telefone: DataTypes.STRING,
     dataNascimento: DataTypes.DATEONLY,
-    tituloEleitor: DataTypes.STRING,
-    reservista: DataTypes.STRING,
+    ra: DataTypes.STRING,
     deletedAt: DataTypes.DATE
   }, {
     sequelize,

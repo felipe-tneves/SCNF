@@ -1,3 +1,4 @@
+const Professores = require('./professores')
 'use strict';
 const {
   Model
@@ -10,22 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Calendarios.hasOne(models.ADMs, {
-        foreignKey: 'id_calendario'
-      })
       Calendarios.hasOne(models.Professores, {
-        foreignKey: 'id_calendario'
+        foreignKey: 'id_calendarios'
       })
       Calendarios.hasOne(models.Alunos, {
-        foreignKey: 'id_calendario'
+        foreignKey: 'id_calendarios'
+      })
+      Calendarios.hasOne(models.Adms, {
+        foreignKey: 'id_calendarios'
       })
     }
   };
   Calendarios.init({
+    data: DataTypes.STRING,
     dataPeriodoEscolar: DataTypes.STRING,
     dataAvaliacoes: DataTypes.STRING,
-    dataNotasProfessores: DataTypes.STRING,
-    datas: DataTypes.STRING
+    dataNotasProfessor: DataTypes.STRING,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Calendarios',

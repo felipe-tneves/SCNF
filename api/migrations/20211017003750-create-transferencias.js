@@ -1,38 +1,43 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Materias', {
+    await queryInterface.createTable('Transferencias', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nome: {
+      dataTransferencia: {
+        type: Sequelize.DATEONLY
+      },
+      instituicaoOrigem: {
         type: Sequelize.STRING
       },
-      cargaHoraria: {
+      reaproveitamento: {
         type: Sequelize.STRING
-      },
-      frequencia: {
-        type: Sequelize.FLOAT
-      },
-      numerosAulas: {
-        type: Sequelize.INTEGER
-      },
-      dataMateria: {
-        type: Sequelize.STRING
-      },
-      statusMateria: {
-        type: Sequelize.BOOLEAN
       },
       observacoes: {
         type: Sequelize.STRING
       },
-      id_notas: {
+      id_alunos: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Notas', key: 'id'}
+        references: {
+          model: 'Alunos',
+          key: 'id'
+        }
+      },
+      id_adms: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Adms',
+          key: 'id'
+        }
+      },
+      deletedAt: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +50,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Materias');
+    await queryInterface.dropTable('Transferencias');
   }
 };

@@ -1,0 +1,30 @@
+npx sequelize-cli model:create --name Infos --attributes nome:string,cpf:string,rg:string,endereco:string,cep:string,sexo:string,email:string,emailInst:string,status:boolean,telefone:string,dataNascimento:dateonly,ra:string,deletedAt:date
+
+npx sequelize-cli model:create --name Campus --attributes nome:string,endereco:string,cep:string,telefone:string,quantAlunos:integer,sede:boolean,deletedAt:date
+
+npx sequelize-cli model:create --name Calendarios --attributes data:string,dataPeriodoEscolar:string,dataAvaliacoes:string,dataNotasProfessor:string,deletedAt:date
+
+npx sequelize-cli model:create --name Professores --attributes senha:string,status:boolean,deletedAt:date
+
+npx sequelize-cli model:create --name Cursos --attributes nome:string,duracao:float,observacoes:string,deletedAt:date 
+
+npx sequelize-cli model:create --name Matriculas --attributes statusMatricula:boolean,dataInicioCurso:dateonly,dataTerminoCurso:dateonly,observacoes:string,deletedAt:date
+
+npx sequelize-cli model:create --name Turmas --attributes codigo:string,status:boolean,periodo:string,deletedAt:date
+
+npx sequelize-cli model:create --name Materias --attributes nome:string,cargaHoraria:float,frequencia:float,numerosAulas:float,status:enum,diasMateria:string,observacoes:string,deletedAt:date
+
+npx sequelize-cli model:create --name Adms --attributes cargo:string,senha:string,status:boolean,deletedAt:date
+
+npx sequelize-cli model:create --name Trancamentos --attributes motivo:string,dataTrancamento:dateonly,deletedAt:date
+
+npx sequelize-cli model:create --name Transferencias --attributes dataTransferencia:dateonly,instituicaoOrigem:string,reaproveitamento:string,observacoes:string,deletedAt:date
+
+npx sequelize-cli model:create --name Notas --attributes np1:float,np2:float,trabalhos:float,exame:float,sub:float,projIntegrador:float,media:float,observacoes:string,deletedAt:date
+
+npx sequelize-cli model:create --name Alunos --attributes senha:string,status:boolean,tipoIngresso:string,instituicaoOrigem:string,rendaFamiliar:decimal,deletedAt:date
+
+
+
+
+

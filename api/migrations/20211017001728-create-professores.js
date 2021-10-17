@@ -1,15 +1,12 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Alunos', {
+    await queryInterface.createTable('Professores', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      tipoIngresso: {
-        type: Sequelize.STRING
       },
       senha: {
         type: Sequelize.STRING
@@ -17,25 +14,24 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN
       },
+      deletedAt: {
+        type: Sequelize.DATE
+      },
+      id_calendarios: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Calendarios',
+          key: 'id'
+        }
+      },
       id_infos: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Infos', key: 'id'}
-      },
-      id_matricula: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Matriculas', key: 'id'}
-      },
-      id_materia: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Materias', key: 'id'}
-      },
-      id_calendario: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: 'Calendarios', key: 'id'}
+        references: {
+          model: 'Infos',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +44,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Alunos');
+    await queryInterface.dropTable('Professores');
   }
 };

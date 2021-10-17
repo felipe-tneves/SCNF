@@ -5,6 +5,7 @@ const transferencias = require('./transferenciasRoute')
 const calendarios = require('./calendariosRoute')
 const matriculas = require('./matriculasRoute')
 const materias = require('./materiasRouter')
+const campus = require('./campusRoute')
 
 module.exports = app => {
     app.use(
@@ -14,6 +15,7 @@ module.exports = app => {
         transferencias,
         calendarios,
         matriculas,
-        materias
+        materias,
+        campus
     )
 }
