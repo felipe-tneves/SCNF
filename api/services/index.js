@@ -6,6 +6,7 @@ const MatriculasServices = require('./MatriculasServirces')
 const MateriasServices = require('./MateriasServices')
 const CampusServices = require('./CampusServices')
 const ProfessoresServices = require('./ProfessoresServices')
+const CursosServices = require('./CursosServices')
 
 module.exports = {
     NotasServices: NotasServices,
@@ -15,5 +16,6 @@ module.exports = {
     MatriculasServices: MatriculasServices,
     MateriasServices: MateriasServices,
     CampusServices: CampusServices,
-    ProfessoresServices: ProfessoresServices
+    ProfessoresServices: ProfessoresServices,
+    CursosServices: CursosServices
 }
