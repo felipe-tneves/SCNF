@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_cursos'
       })
       Alunos.belongsTo(models.Materias, {
-        foreignKey: 'id_materias'
+        foreignKey: 'id_materias',
+        type: DataTypes.ARRAY(DataTypes.INTEGER)
       })
       Alunos.belongsTo(models.Infos, {
         foreignKey: 'id_infos'
@@ -30,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       })
       Alunos.belongsTo(models.Calendarios, {
         foreignKey: 'id_calendarios'
+      })
+      Alunos.belongsTo(models.Turmas, {
+        foreignKey: 'id_turmas'
       })
     }
   };

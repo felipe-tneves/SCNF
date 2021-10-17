@@ -57,7 +57,7 @@ module.exports = {
       },
       id_materias: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: [Sequelize.INTEGER],
         references: {
           model: 'Materias',
           key: 'id'
