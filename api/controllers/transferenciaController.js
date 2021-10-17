@@ -1,7 +1,7 @@
 const Services = require('../services/Services')
 const transferenciasServices = new Services('Transferencias')
 
-class InfosController{
+class TransferenciasController{
 
     static async getAllTransferencias(req, res){
         try {
@@ -58,4 +58,4 @@ class InfosController{
     }
 }
 
-module.exports = InfosController
+module.exports = TransferenciasController

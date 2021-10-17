@@ -1,7 +1,7 @@
 const Services = require('../services/Services')
 const professoresServices = new Services('Professores')
 
-class NotaController{
+class ProfessorController{
 
     static async getAllProfessores(req, res){ 
         try {
@@ -59,4 +59,4 @@ class NotaController{
 
 }
 
-module.exports = NotaController
+module.exports = ProfessorController
