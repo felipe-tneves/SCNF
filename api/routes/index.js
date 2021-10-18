@@ -11,6 +11,7 @@ const cursos = require('./cursosRoute')
 const turmas = require('./turmasRoute')
 const adms = require('./admsRoute')
 const alunos = require('./alunosRoute')
+const trancamentos = require('./trancamentosRoute')
 
 module.exports = app => {
     app.use(
@@ -26,6 +27,7 @@ module.exports = app => {
         cursos,
         turmas,
         adms,
-        alunos
+        alunos,
+        trancamentos
     )
 }
