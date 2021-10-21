@@ -35,6 +35,12 @@ module.exports = (sequelize, DataTypes) => {
       Alunos.belongsTo(models.Turmas, {
         foreignKey: 'id_turmas'
       })
+      Alunos.hasOne(models.Trancamentos, {
+        foreignKey: 'id_alunos'
+      })
+      Alunos.hasOne(models.Transferencias, {
+        foreignKey: 'id_alunos'
+      })
     }
   };
   Alunos.init({
