@@ -11,6 +11,9 @@ module.exports = {
       cargo: {
         type: Sequelize.STRING
       },
+      ra: {
+        type: Sequelize.STRING
+      },
       senha: {
         type: Sequelize.STRING
       },
