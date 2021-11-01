@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Adms.init({
+    ra: DataTypes.STRING,
     cargo: DataTypes.STRING,
     senha: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
