@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Professores.init({
+    ra: DataTypes.STRING,
     senha: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
     deletedAt: DataTypes.DATE

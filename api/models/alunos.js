@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Alunos.init({
     senha: DataTypes.STRING,
+    ra: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
     tipoIngresso: DataTypes.STRING,
     instituicaoOrigem: DataTypes.STRING,
